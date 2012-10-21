@@ -1,0 +1,145 @@
+html, ul {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: url('images/wood.jpg') no-repeat;
+  background-size: 100% 100%;
+  font-size: 12px;
+}
+
+.post-it {
+  position: absolute;
+  left: 35%;
+  top: 20%;
+  width: 30%;
+  line-height: 5em;
+  font-size: 5em;
+  font-family: 'Nothing You Could Do', cursive;
+  text-shadow: 0 0 1px rgba(0, 0, 0, .6);
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, .2);
+  background: rgb(254,252,234);
+  background: -moz-linear-gradient(top,  rgba(254,252,234,1) 0%, rgba(239,227,151,1) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,252,234,1)), color-stop(100%,rgba(239,227,151,1)));
+  background: -webkit-linear-gradient(top,  rgba(254,252,234,1) 0%,rgba(239,227,151,1) 100%);
+  background: -o-linear-gradient(top,  rgba(254,252,234,1) 0%,rgba(239,227,151,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(254,252,234,1) 0%,rgba(239,227,151,1) 100%);
+  background: linear-gradient(to bottom,  rgba(254,252,234,1) 0%,rgba(239,227,151,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#efe397',GradientType=0 );
+}
+.post-it:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: .1em;
+  left: .1em;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, .2);
+  background: rgb(254,252,234);
+  background: -moz-linear-gradient(top,  rgba(254,252,234,1) 0%, rgba(239,227,151,1) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,252,234,1)), color-stop(100%,rgba(239,227,151,1)));
+  background: -webkit-linear-gradient(top,  rgba(254,252,234,1) 0%,rgba(239,227,151,1) 100%);
+  background: -o-linear-gradient(top,  rgba(254,252,234,1) 0%,rgba(239,227,151,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(254,252,234,1) 0%,rgba(239,227,151,1) 100%);
+  background: linear-gradient(to bottom,  rgba(254,252,234,1) 0%,rgba(239,227,151,1) 100%);
+  width: 100%;
+  height: 100%;
+  -webkit-transform:rotate(-6deg);
+  z-index: -2;
+}
+.post-it:before {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: .2em;
+  right: .5em;
+  width: 35%;
+  height: .3em;
+  box-shadow: 0 0 .5em .3em rgba(0, 0, 0, .2);
+  transform:rotate(5deg);
+  -ms-transform:rotate(5deg);
+  -moz-transform:rotate(5deg);
+  -webkit-transform:rotate(5deg);
+  -o-transform:rotate(5deg);
+  z-index: -1;
+}
+
+.answers {
+  position: fixed;
+  bottom: 1%;
+  width: 100%;
+  list-style: none;
+  font-family: 'Nothing You Could Do', cursive;
+  font-size: 2.3em;
+  text-shadow: 0 0 1px rgba(0, 0, 0, .6);
+}
+
+.answers > * {
+  position: relative;
+  width: 29%;
+  height: 5em;
+  text-align: center;
+  margin: .3em 1% 0 1%;
+  padding: 1%;
+  float: left;
+  background: rgb(197,210,219);
+  background: -moz-linear-gradient(top,  rgba(197,210,219,1) 0%, rgba(133,178,211,1) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(197,210,219,1)), color-stop(100%,rgba(133,178,211,1)));
+  background: -webkit-linear-gradient(top,  rgba(197,210,219,1) 0%,rgba(133,178,211,1) 100%);
+  background: -o-linear-gradient(top,  rgba(197,210,219,1) 0%,rgba(133,178,211,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(197,210,219,1) 0%,rgba(133,178,211,1) 100%);
+  background: linear-gradient(to bottom,  rgba(197,210,219,1) 0%,rgba(133,178,211,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c5d2db', endColorstr='#85b2d3',GradientType=0 );
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, .2);
+  border-radius: 10px;
+  transition: transform .3s;
+  -moz-transition: -moz-transform .3s;
+  -webkit-transition: -webkit-transform .3s;
+  -o-transition: -o-transform .3s;
+}
+.answers > *:hover {
+  cursor: pointer;
+  margin: 0 1%;
+  box-shadow: 0 0 .5em .1em rgba(0, 0, 0, .2);
+  -webkit-transform:rotate(5deg);
+}
+.answers > *:hover:after {
+  position: absolute;
+  content: '';
+  display: block;
+  top: -.4em;
+  width: 0;
+  height: 0;
+  border-bottom: .5em solid rgb(197,210,219);
+  border-right: .5em solid transparent;
+  border-left: .5em solid transparent;
+}
+
+.answers.show > *:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20%;
+    line-height: 4em;
+    margin: -2em 0 0 -10%;
+    font-size: 4em;
+}
+
+.answers.show > *.wrong:before {
+    content: 'X';
+    color: red;
+}
+
+.answers.show > *.correct:before {
+    content: '\2713';
+    color: green;
+}

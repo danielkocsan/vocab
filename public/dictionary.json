@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "word": "Concern",
+        "explanation": "To cause worry to someone"
+    },
+    {
+        "id": 2,
+        "word": "Relief",
+        "explanation": "A feeling of happiness that something unpleasant has not happened or has ended"
+    },
+    {
+        "id": 3,
+        "word": "Reluctant",
+        "explanation": "Not willing to do something and therefore slow to do it"
+    },
+    {
+        "id": 4,
+        "word": "Obligation",
+        "explanation": "Something that you must do"
+    },
+    {
+        "id": 5,
+        "word": "Intention",
+        "explanation": "Something that you want and plan to do"
+    },
+    {
+        "id": 6,
+        "word": "Incentive",
+        "explanation": "Something which encourages a person to do something"
+    },
+    {
+        "id": 7,
+        "word": "Circumstance",
+        "explanation": "A fact or event that makes a situation the way it is"
+    },
+    {
+        "id": 8,
+        "word": "Offend",
+        "explanation": "To make someone upset or angry"
+    },
+    {
+        "id": 9,
+        "word": "Asset",
+        "explanation": "Something valuable belonging to a person or organization which can be used for the payment of debts"
+    }
+]
