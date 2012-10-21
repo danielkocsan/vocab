@@ -22,4 +22,4 @@ require(
 		new ExplanationControl($('<ul />').appendTo(global.document.body));
 		new GameConstruct(WordsetModel);
 	}
-)
+);
