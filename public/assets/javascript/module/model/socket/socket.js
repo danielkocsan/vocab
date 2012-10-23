@@ -3,7 +3,7 @@ define(
 	function () {
 		var global = window,
 			Socket = function () {
-				this.socket = io.connect('ws://localhost:8020');
+				this.socket = io.connect('ws://' + window.location.hostname + ':8020');
 
 				this.bind();
 			}
