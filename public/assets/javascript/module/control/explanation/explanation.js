@@ -10,7 +10,6 @@ define(
                 init: function (element) {
                     this.element = element;
                     this.element.addClass('answers');
-                    this.bind();
 
                     this.containers = {};
 
@@ -21,19 +20,7 @@ define(
                     this.containerCount = this.element.children().length;
                 },
 
-                bind: function () {
-                    $(global.document.body).bind(
-                        'wordSet-ready',
-                         $.proxy(this.wordSetReady, this)
-                    );
-
-                    this.element.bind(
-                        'click',
-                        $.proxy(this.clicked, this)
-                    );
-                },
-
-                wordSetReady: function (event) {
+                '{window} wordset_ready': function (element, event) {
                     var wordSet = event.data,
                         index,
                         randomSequence = [0, 1, 2].sort(
@@ -46,8 +33,8 @@ define(
                     this.element.removeClass('show');
 
                     for (index in randomSequence) {
-                        this.containers[index].html(
-                            (wordSetArray[randomSequence[index]]).explanation
+                        this.containers[randomSequence[index]].html(
+                            (wordSetArray[index]).explanation
                         );
                     }
 
@@ -55,20 +42,16 @@ define(
                     this.containers[randomSequence[0]].removeClass('wrong').addClass('correct');
                 },
 
-                clicked: function (event) {
+                'li click': function (element, event) {
                     event.preventDefault();
 
                     this.element.addClass('show');
 
                     can.trigger(
                         global.document.body,
-                        'answer-got',
+                        'answer_got',
                         $(event.srcElement).html()
                     );
-                },
-
-                insertExplanation: function (explanation) {
-                    this.cont1.html(explanation);
                 }
             }
         );
