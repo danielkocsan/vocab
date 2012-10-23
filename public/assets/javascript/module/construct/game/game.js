@@ -7,65 +7,27 @@ define(
 
         return can.Construct(
         {
-            init: function (model) {
+            init: function () {
                 this.bind();
 
-                model.findAll(
-                    {},
-                    $.proxy(this.dictionarySuccess, this)
-                );
+                this.getNextWordSet();
             },
 
             bind: function () {
                 $(global.document.body).bind(
-                    'answer-got',
+                    'answer_got',
                     $.proxy(this.answerGot, this)
                 );
             },
 
-            dictionarySuccess: function (model) {
-                this.model = model;
-                this.wordCount = this.model.length;
-                this.initWordSet();
-            },
-
-            initWordSet: function () {
-                this.correctWord = this.getNextWord();
-                can.trigger(
-                    global.document.body,
-                    'wordSet-ready',
-                    {
-                        "correct": this.correctWord,
-                        "wrong1": this.getWrongWord(this.correctWord),
-                        "wrong2": this.getWrongWord(this.correctWord)
-                    }
-                );
-            },
-
-            getNextWord: function () {
-                var index = this.generateRandomDictionaryIndex();
-                return this.model[index];
-            },
-
-            getWrongWord: function (correctWord) {
-                var word;
-
-                do {
-                    word = this.getNextWord();
-                } while (word.explanation === correctWord.explanation);
-
-                return word;
-            },
-
-            generateRandomDictionaryIndex: function () {
-                return Math.floor(Math.random() * this.wordCount);
+            getNextWordSet: function () {
+                $(global).trigger('wordset_needed');
             },
 
             answerGot: function (event) {
-                var answer = event.data,
-                    result = answer === this.correctWord.explanation;
+                var answer = event.data;
 
-                global.setTimeout($.proxy(this.initWordSet, this), 2000);
+                global.setTimeout($.proxy(this.getNextWordSet, this), 2000);
             }
         });
     }
