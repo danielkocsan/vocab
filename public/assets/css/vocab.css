@@ -132,14 +132,15 @@ body {
     line-height: 4em;
     margin: -2em 0 0 -10%;
     font-size: 4em;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .7);
 }
 
 .answers.show > *.wrong:before {
-    content: 'X';
-    color: red;
+    content: 'x';
+    color: #FA023C;
 }
 
 .answers.show > *.correct:before {
     content: '\2713';
-    color: green;
+    color: #BEF202;
 }
