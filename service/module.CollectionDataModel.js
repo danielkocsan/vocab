@@ -38,6 +38,36 @@ CollectionDataModel.prototype = {
                 callback(result);
             }
         );
+    },
+
+    getWordsRandom: function (idList, callback) {
+        this.collection.find(
+            {
+                '_id': {
+                    '$nin': idList
+                }
+            },
+            {
+            },
+            function (error, cursor) {
+                cursor.count(
+                    function (error, count) {
+                        var skip = count < 3 ? 0 : Math.round((Math.random() * (count - 3)) );
+                        cursor.skip(
+                            skip,
+                            function (error, cursor) {
+                                cursor.limit(
+                                    3,
+                                    function (error, cursor) {
+                                        callback(cursor);
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
+            }
+        );
     }
 }
 

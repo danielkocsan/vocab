@@ -1,7 +1,11 @@
 var express = require('express'),
     DatabaseLayer = require('./module.DatabaseLayer.js'),
     CollectionDataModel = require('./module.CollectionDataModel.js'),
-    app = express();
+    app = express(),
+    server = require('http').createServer(),
+    io = require('socket.io').listen(server);;
+
+server.listen(8020);
 
 var mydb = new DatabaseLayer('localhost', 'vocab');
 var wordsetModel = new CollectionDataModel('wordset', mydb);
@@ -46,4 +50,64 @@ app.post(
     }
 );
 
-app.listen(8010);
+var WordsetController = function (model) {
+    this.model = model;
+    this.idList = {};
+}
+
+WordsetController.prototype = {
+    parse: function (action, arguments) {
+        if (this[action] && typeof this[action] === 'function') {
+            this[action].apply(this, arguments);
+        }
+    },
+
+    wordset_needed: function (socket) {
+        var that = this;
+
+        if (!that.idList[socket.id]) {
+            that.idList[socket.id] = [];
+        }
+
+        wordsetModel.getWordsRandom(
+            that.idList[socket.id],
+            function (cursor) {
+                cursor.toArray(
+                    function (error, docs) {
+                        if (docs && docs.length === 3) { 
+                            that.idList[socket.id].push(docs[0]._id);
+
+                            socket.emit(
+                                'wordset_ready', 
+                                {
+                                    correct: docs[0],
+                                    wrong1: docs[1],
+                                    wrong2: docs[2]
+                                }
+                            );
+                        } else {
+                            socket.emit('no_more_words');
+                            delete that.idList[socket.id];
+                        }
+                    }
+                );
+            }
+        );
+    }
+}
+
+var wordsetController = new WordsetController(wordsetModel);
+
+io.set('log level', 1); 
+
+io.sockets.on(
+    'connection',
+    function (socket) {
+        socket.on(
+            'message',
+            function (messageType) {
+                wordsetController.parse(messageType, [socket]);                
+            }
+        );
+    }
+);
